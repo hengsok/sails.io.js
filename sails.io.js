@@ -666,7 +666,9 @@
       var _opts = {};
       SOCKET_OPTIONS.forEach(function(option) {
         // Okay to change global headers while socket is connected
-        if (option == 'headers') {return;}
+        //301220 - query and path need to be changed. If not, socketio client will not pass
+        //path and query values to backend socket io.
+        if (option == 'headers' || option == 'query' || option == 'path') {return;}
         Object.defineProperty(self, option, {
           get: function() {
             if (option == 'url') {
